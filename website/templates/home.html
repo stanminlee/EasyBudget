@@ -1,0 +1,103 @@
+<!-- html file for the homepage displauyed after logging in 
+     we display all of the income and expenses here -->
+
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<br>
+
+<div class = "container-fluid">
+    <div class = "row">
+        <div class = "col-md-4 bg-light p-4">
+            <h1 class = "mb-4"> Track Expenses </h1>
+            
+            <!-- income form -->
+            <form method = "POST" class = "mb-4" id = "income-form">
+                <div class = "form-group">
+                    <label for = "income"> Total Monthly Income </label>
+                    <input type = "number" name = "income" id = "income" class = "form-control" step = "0.01">
+                </div>
+                <button type = "submit" class = "btn btn-primary mt-3"> Add Income </button>
+                <input type = "hidden" name = "action" value = "income"> 
+            </form>
+            
+            <!-- expense form -->
+            <form method = "POST" id = "expense-form">
+                <div class = "form-group">
+                    <label for = "expense-name"> Expense Name </label>
+                    <input type = "text" name = "expense_name" id = "expense-name" class = "form-control">
+                </div>
+                <div class = "form-group">
+                    <label for = "expense-amount"> Expense Amount </label>
+                    <div class="input-group">
+                        <input type = "number" name = "expense_amount" id = "expense-amount" class = "form-control" step = "0.01">
+                        <div class = "input-group-append">
+                            <button type = "submit" class = "btn btn-primary"> Add </button>
+                        </div>
+                    </div>
+                </div>
+                <input type = "hidden" name = "action" value = "expense">
+            </form>
+        </div>
+        
+
+        <!-- for displaying the expenses -->
+        <div class = "col-md-8 bg-white p-4">
+            <h2 class = "mb-4">Expenses List</h2>
+            <ul class = "list-group">
+                {% for expense in user.expenses %}
+                <li class = "list-group-item">
+                    <strong>{{ expense.name }}</strong>: ${{ expense.amount }}
+                    <button type = "button" class = "close" onClick = "deleteExpense({{ expense.id }})">
+                        <span aria-hidden = "true">&times;</span>
+                    </button>
+                </li>
+                {% endfor %}
+            </ul>
+            
+            <div class = "mt-4">
+                <p class = "h5">Total Monthly Income: ${{ total_income }}</p>
+                <p class = "h5">Total Expenses: ${{ total_expenses }}</p>
+                <p class = "h5">Recommended Savings: ${{ savings }}</p>
+                <p class = "h5">Remaining Balance: ${{ remaining_balance }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div id="instructions-content" style="display: none;">
+    <p>
+        1. Type your monthly income into the "Total Monthly Income" box and click "Add Income". <br>
+        2. Add the names and costs of your expenses in their corresponding boxes and clock "Add". <br>
+        3. Your expenses should appear on the screen. Underneath, you are given a breakdown of your total monthly income,
+        recommended savings (based on the 50/30/20 rule), and remaining balance for other expenses. <br>
+        4. More visuals and features such as tracking past months are in the works!
+    </p>
+</div>
+
+<button id="instructions-toggle" class="btn btn-primary instructions-button"> Need Help? </button>
+
+<br>
+<br>
+        <!-- script used for displaying the instructions -->
+        <script>
+            document.getElementById('instructions-toggle').addEventListener('click', function() {
+                var instructionsContent = document.getElementById('instructions-content');
+                if (instructionsContent.style.display === 'none') {
+                    instructionsContent.style.display = 'block';
+                    this.textContent = 'Close';
+                } else {
+                    instructionsContent.style.display = 'none';
+                    this.textContent = 'Need Help?';
+                }
+            });
+        </script>
+
+{% endblock %}

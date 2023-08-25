@@ -1,0 +1,33 @@
+<!-- html file displaying the login page -->
+
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+
+<form method = "POST">
+    <br>
+    <h3 align = "center"> Login </h3>
+    <br>
+    <div class = "form-group">
+        <label for = "email">
+            Email
+        </label>
+        <input type = "text" class = "form-control" id = "email" name = "email" placeholder = "Enter Email" />
+    </div>
+    <div class = "form-group">
+        <label for = "password">
+            Password
+        </label>
+        <input type = "password" class = "form-control" id = "password" name = "password" placeholder = "Enter Password" />
+    </div>
+
+    <p style = "font-size: 12px;"> Don't have an account? <a href = "signup "> Sign Up </a> </p>
+
+    <button type = "submit" class = "btn btn-primary"> Submit </button>
+</form>
+
+{% endblock %}
