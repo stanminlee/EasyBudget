@@ -5,4 +5,4 @@ I made a budgeting application with unique user authentication. You can input yo
 You will need flask, flask-login, and SQLAlchemy to run this project.
 To launch the project, run the "main.py" file and access your local host address on port 8000.
 
-I mainly used python and html, but there are elements of SQL, CSS, and Javascript mixed in as well. 
+I mainly used Python and HTML, but there are elements of SQL, CSS, and Javascript mixed in as well. 
